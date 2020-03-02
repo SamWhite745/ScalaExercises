@@ -1,4 +1,5 @@
 object Main extends App {
+<<<<<<< HEAD
   def addSmallMultiplyBig(a:Int, b:Int, c:Int) : Int = {
     val nums = List(a,b,c).sorted
     (nums(0) + nums(1)) * nums(2)
@@ -16,4 +17,9 @@ object Main extends App {
 
   println(addSmallMultiplyBig(3,4,5))
   bottlesOfBeer(99)
+=======
+
+  println("Hello World!")
+
+>>>>>>> Added hello world
 }
