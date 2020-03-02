@@ -1,11 +1,12 @@
 object Main extends App {
+  def endString(word:String, number:Int):String = {
+    var endWord = ""
+    for (i <- word.length-number until word.length){
+      endWord += word.charAt(i)
+    }
 
-  var MotD = "Hello World"
-
-  def printMoTD(MotD: Any): Unit = {
-    println(MotD)
+    endWord
   }
 
-  printMoTD(8.0)
-
+  println(endString("Hello", 3))
 }
