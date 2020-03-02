@@ -1,4 +1,8 @@
 object Main extends App {
-  val MoTD = "Hello World!"
-  println(MoTD)
+  def printMoTD(MotD:String): Unit = {
+    println(MotD)
+  }
+
+  printMoTD("Hello World!")
+
 }
