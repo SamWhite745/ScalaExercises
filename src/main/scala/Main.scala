@@ -1,8 +1,11 @@
 object Main extends App {
-  def printMoTD(MotD:String): Unit = {
+
+  var MotD = "Hello World"
+
+  def printMoTD(MotD: Any): Unit = {
     println(MotD)
   }
 
-  printMoTD("Hello World!")
+  printMoTD(8.0)
 
 }
