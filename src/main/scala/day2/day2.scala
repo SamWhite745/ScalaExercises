@@ -164,14 +164,52 @@ object day2 extends App {
     letter
   }
 
+  def printGuessingWord(word:String): Unit = {
+    for (letter <-0  until word.length-1) {
+      print(s"${word.charAt(letter)} ")
+    }
+    print(s"${word.last}\n")
+  }
+
+  def getLocations(word:String, char:Char) = {
+    var locations = ListBuffer[Int]()
+    for (i <- 0 until word.length) {
+      if (word.charAt(i) == char) locations += i
+    }
+    locations
+  }
+
   def playHangman()= {
     val word = getRandomWord()
     var playing = true
     var used = ListBuffer[Char]();
+    var fouls = 0
+    var outputWord = ""
+    for (i <- 0 until word.length) {
+      outputWord += "_"
+    }
 
     while (playing) {
+      Console.flush()
+      printGuessingWord(outputWord)
       val letterGuess = getUserValidCharInput(used.toList)
       used += letterGuess
+
+      if (word.contains(letterGuess)) {
+        println("Good guess!")
+
+      } else {
+        println("Foul!")
+        fouls+=1
+      }
+
+      if (fouls == 11) {
+        println("Oh dear! you lost!")
+        println("Better luck next time!")
+        playing = false
+      } else {
+        println(s"You have fouled $fouls times")
+      }
     }
   }
 
