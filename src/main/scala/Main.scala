@@ -1,13 +1,7 @@
 object Main extends App {
   def addSmallMultiplyBig(a:Int, b:Int, c:Int) : Int = {
-    var nums = List(a,b,c)
-    nums = nums.sorted
-
-    (a+b)*c
-  }
-  def oneBottle(num:Int) = {
-    if (num==1) "bottle"
-    else "bottles"
+    val nums = List(a,b,c).sorted
+    (nums(0) + nums(1)) * nums(2)
   }
 
   def bottlesOfBeer(bottles : Int): Unit = {
