@@ -132,8 +132,21 @@ object day2 extends App {
       if (allWords.nonEmpty) println(allWords.maxBy(_.length))
     }
   }
+//  brokenKeyboards(true)
 
-  brokenKeyboards(true)
+  def getRandomWord(): String = {
+    val fileName = "hangmanWords.txt"
+    val words = Source.fromFile(fileName).getLines().toArray
+    words(scala.util.Random.nextInt(words.length))
+  }
+
+  def checkRandomWords() = {
+    for (i <- 0 until 50) {
+      println(getRandomWord())
+    }
+  }
+
+  checkRandomWords()
 
 }
 
