@@ -1,5 +1,6 @@
 package day2
 
+//noinspection TypeAnnotation
 object day2 extends App {
   def string2(word1: String, word2: String, char1: Char, char2: Char): String = {
     var returnWord = word1 ++ word2
@@ -46,7 +47,8 @@ object day2 extends App {
   }
 //  fizzBuzz("fizz","buzz",20)
 
-  def iterationRecursion (word:String, num:Int) : Int = {
+  @scala.annotation.tailrec
+  def iterationRecursion(word:String, num:Int) : Int = {
     if (num != 0) {
       println(word)
       iterationRecursion(word, num - 1)
@@ -54,7 +56,8 @@ object day2 extends App {
   }
 //  iterationRecursion("Hello", 5)
 
-  def iteration2Recursion (word:String,init:Int, num:Int) : Int = {
+  @scala.annotation.tailrec
+  def iteration2Recursion(word:String, init:Int, num:Int) : Int = {
     if (num != 0) {
       println(word*init)
       iteration2Recursion(word, init, num-1)
@@ -62,6 +65,7 @@ object day2 extends App {
   }
 //  iteration2Recursion("H", 5,5)
 
+  @scala.annotation.tailrec
   def fizzBuzzRecursion(word1:String, word2:String, target:Int, num:Int) : Int = {
     if (num <= target) {
       var str = new StringBuilder
@@ -73,6 +77,18 @@ object day2 extends App {
     } else 0
   }
 //  fizzBuzzRecursion("fizz", "buzz", 20, 1)
+
+  def operatorsMatch(num1: Int, num2: Int, plus: Boolean) = (num1, num2, plus) match{
+    case (0,x,_)=> x
+    case (x,0,_)=> x
+    case (x,y,true)=> x+y
+    case (x,y,false)=> x*y
+    case _ => "Error!"
+  }
+//  println(operatorsMatch(5,10,plus = false))
+
+
+
 }
 
 
