@@ -181,6 +181,7 @@ object day2 extends App {
 
   def playHangman()= {
     val word = getRandomWord()
+    val wordSet = word.toSet
     var playing = true
     var used = ListBuffer[Char]();
     var fouls = 0
@@ -197,7 +198,16 @@ object day2 extends App {
 
       if (word.contains(letterGuess)) {
         println("Good guess!")
-
+        val locations = getLocations(word, letterGuess)
+        for (location <- locations) {
+          val outputCharArray = outputWord.toCharArray
+          outputCharArray(location) = letterGuess
+          outputWord = outputCharArray.mkString("")
+        }
+        if (outputWord.toSet == wordSet) {
+          println("Congratulations, you win!")
+          playing = false
+        }
       } else {
         println("Foul!")
         fouls+=1
