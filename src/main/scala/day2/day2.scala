@@ -140,13 +140,44 @@ object day2 extends App {
     words(scala.util.Random.nextInt(words.length))
   }
 
-  def checkRandomWords() = {
-    for (i <- 0 until 50) {
-      println(getRandomWord())
+  def getUserValidCharInput(used:List[Char]): Char = {
+    var found = false;
+    var letter: Char = 'a'
+
+    while (!found) {
+      print("Currently used letters: ")
+      used.foreach(el => print(s"$el "))
+      print("\n")
+      val input = scala.io.StdIn.readLine("please input a character to check> ")
+      if (input.length > 1) {
+        println("Not a valid input")
+      } else {
+        val inputChar = input.head
+        if (inputChar.isLetter) {
+          if (!used.contains(inputChar.toLower)) {
+            letter = inputChar.toLower
+            found = true
+          } else println("already guessed!")
+        } else println("Not a valid input")
+      }
+    }
+    letter
+  }
+
+  def playHangman()= {
+    val word = getRandomWord()
+    var playing = true
+    var used = ListBuffer[Char]();
+
+    while (playing) {
+      val letterGuess = getUserValidCharInput(used.toList)
+      used += letterGuess
     }
   }
 
-  checkRandomWords()
+  playHangman()
+
+
 
 }
 
