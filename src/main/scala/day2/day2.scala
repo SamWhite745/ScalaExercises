@@ -157,7 +157,7 @@ object day2 extends App {
       used.foreach(el => print(s"$el "))
       print("\n")
       val input = scala.io.StdIn.readLine("please input a character to check> ")
-      if (input.length > 1) {
+      if (input.length != 1) {
         println("Not a valid input")
       } else {
         val inputChar = input.head
@@ -209,9 +209,11 @@ object day2 extends App {
       println("1 - Easy - between 1 and 5 (inclusive)")
       println("2 - Medium - between 5 and 8 (inclusive)")
       println("3 - Hard - more than 8")
-      difficulty = scala.io.StdIn.readLine("What difficulty would you like to play on?> ").toInt
-      if (difficulty >= 1 && difficulty <= 3) validInput = true
-      else println("Invalid difficulty")
+      val difficultyInput = scala.io.StdIn.readLine("What difficulty would you like to play on?> ")
+      if (difficultyInput == "1" || difficultyInput == "2" || difficultyInput == "3") {
+        difficulty = difficultyInput.toInt
+        validInput = true
+      } else println("Not valid difficulty")
     }
     difficulty
   }
