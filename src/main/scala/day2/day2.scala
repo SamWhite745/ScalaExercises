@@ -220,8 +220,8 @@ object day2 extends App {
 
   def playHangman()= {
     println("Welcome to hangman!")
-    val diffuclty = getDifficulty()
-    val word = getRandomWord(diffuclty)
+    val difficulty = getDifficulty()
+    val word = getRandomWord(difficulty)
     val wordSet = word.toSet
     var playing = true
     var used = ListBuffer[Char]();
