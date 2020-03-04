@@ -134,10 +134,18 @@ object day2 extends App {
   }
 //  brokenKeyboards(true)
 
-  def getRandomWord(): String = {
-    val fileName = "hangmanWords.txt"
+  def getRandomWord(difficulty:Int): String = {
+    val fileName = "enable1.txt"
     val words = Source.fromFile(fileName).getLines().toArray
-    words(scala.util.Random.nextInt(words.length))
+    var validWord = false
+    var word = ""
+    while (!validWord) {
+      word = words(scala.util.Random.nextInt(words.length))
+      if (difficulty == 1 && word.length <= 5) validWord =true
+      else if (difficulty == 2 && (word.length >= 5 && word.length <=8)) validWord = true
+      else if (difficulty == 3 && word.length >= 8) validWord = true
+    }
+    word
   }
 
   def getUserValidCharInput(used:List[Char]): Char = {
@@ -179,8 +187,39 @@ object day2 extends App {
     locations
   }
 
+  def printHangman(fouls:Int):Unit = fouls match{
+    case 11 => Source.fromFile("Hangmen/11.txt").getLines.foreach(println)
+    case 10 => Source.fromFile("Hangmen/10.txt").getLines.foreach(println)
+    case 9 => Source.fromFile("Hangmen/9.txt").getLines.foreach(println)
+    case 8 => Source.fromFile("Hangmen/8.txt").getLines.foreach(println)
+    case 7 => Source.fromFile("Hangmen/7.txt").getLines.foreach(println)
+    case 6 => Source.fromFile("Hangmen/6.txt").getLines.foreach(println)
+    case 5 => Source.fromFile("Hangmen/5.txt").getLines.foreach(println)
+    case 4 => Source.fromFile("Hangmen/4.txt").getLines.foreach(println)
+    case 3 => Source.fromFile("Hangmen/3.txt").getLines.foreach(println)
+    case 2 => Source.fromFile("Hangmen/2.txt").getLines.foreach(println)
+    case 1 => Source.fromFile("Hangmen/1.txt").getLines.foreach(println)
+    case 0 => Source.fromFile("Hangmen/0.txt").getLines.foreach(println)
+  }
+
+  def getDifficulty() : Int = {
+    var validInput = false
+    var difficulty = 0
+    while (!validInput) {
+      println("1 - Easy - between 1 and 5 (inclusive)")
+      println("2 - Medium - between 5 and 8 (inclusive)")
+      println("3 - Hard - more than 8")
+      difficulty = scala.io.StdIn.readLine("What difficulty would you like to play on?> ").toInt
+      if (difficulty >= 1 && difficulty <= 3) validInput = true
+      else println("Invalid difficulty")
+    }
+    difficulty
+  }
+
   def playHangman()= {
-    val word = getRandomWord()
+    println("Welcome to hangman!")
+    val diffuclty = getDifficulty()
+    val word = getRandomWord(diffuclty)
     val wordSet = word.toSet
     var playing = true
     var used = ListBuffer[Char]();
@@ -212,9 +251,10 @@ object day2 extends App {
         println("Foul!")
         fouls+=1
       }
-
+      printHangman(fouls)
       if (fouls == 11) {
         println("Oh dear! you lost!")
+        println(s"The word was: $word")
         println("Better luck next time!")
         playing = false
       } else {
