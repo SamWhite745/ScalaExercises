@@ -32,17 +32,20 @@ object day4 extends App {
     case (x,y) => if (x > y) x else y
   }
 
-//  println(blackJack(22,18))
 
-  def uniqueSum(num1:Int, num2:Int, num3:Int): Int = {
-    var total = 0
-    if (num1 != num2 && num1 != num3) total+= num1
-    if (num2 != num1 && num2 != num3) total+= num2
-    if (num3 != num1 && num3 != num2) total+= num3
-    total
+  @scala.annotation.tailrec
+  def onlyOne(num:Int, nums: Array[Int], total:Int = 0): Boolean = (num, nums, total) match {
+    case (_, Array(), x) => x==1
+    case (x, xs, total) => if (x == xs.head) onlyOne(x, xs.tail, total+1) else onlyOne(x, xs.tail, total)
   }
-//  println(uniqueSum(1,4,4))
-//  println(uniqueSum(3,3,3))
+
+  def uniqueSum(num1: Int, num2: Int, num3: Int): Int =  {
+    Array(num1, num2, num3).filter(x => onlyOne(x, Array(num1, num2, num3))).sum
+  }
+
+//  println(uniqueSum(5,4,5))
+  //  println(blackJack(22,18))
+  //  println(uniqueSum(3,3,3))
 
   def tooHot(temperature:Int, isSummer:Boolean): Boolean = {
     if (isSummer) (temperature >= 60 && temperature <=100)
