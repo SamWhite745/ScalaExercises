@@ -96,7 +96,7 @@ object day2 extends App {
     case _ => "Error!"
   }
 
-//    println(operatorsMatch(num1 = 5, num2 = 10,plus = false))
+  //  println(operatorsMatch(5,10,plus = false))
 
   def patternMatch2(pair: Any): Unit = pair match {
     case Nil =>
@@ -187,6 +187,21 @@ object day2 extends App {
     locations
   }
 
+  def printHangman(fouls:Int):Unit = fouls match{
+    case 11 => Source.fromFile("Hangmen/11.txt").getLines.foreach(println)
+    case 10 => Source.fromFile("Hangmen/10.txt").getLines.foreach(println)
+    case 9 => Source.fromFile("Hangmen/9.txt").getLines.foreach(println)
+    case 8 => Source.fromFile("Hangmen/8.txt").getLines.foreach(println)
+    case 7 => Source.fromFile("Hangmen/7.txt").getLines.foreach(println)
+    case 6 => Source.fromFile("Hangmen/6.txt").getLines.foreach(println)
+    case 5 => Source.fromFile("Hangmen/5.txt").getLines.foreach(println)
+    case 4 => Source.fromFile("Hangmen/4.txt").getLines.foreach(println)
+    case 3 => Source.fromFile("Hangmen/3.txt").getLines.foreach(println)
+    case 2 => Source.fromFile("Hangmen/2.txt").getLines.foreach(println)
+    case 1 => Source.fromFile("Hangmen/1.txt").getLines.foreach(println)
+    case 0 => Source.fromFile("Hangmen/0.txt").getLines.foreach(println)
+  }
+
   def getDifficulty() : Int = {
     var validInput = false
     var difficulty = 0
@@ -238,7 +253,7 @@ object day2 extends App {
         println("Foul!")
         fouls+=1
       }
-      Source.fromFile(s"Hangmen/$fouls.txt").getLines.foreach(println)
+      printHangman(fouls)
       if (fouls == 11) {
         println("Oh dear! you lost!")
         println(s"The word was: $word")
