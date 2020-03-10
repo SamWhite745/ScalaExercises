@@ -5,10 +5,11 @@ object day4 extends App {
     luhn(cardNumber) == 0
   }
 
+  @scala.annotation.tailrec
   def luhn(cardNumber:Long, double:Boolean = false, total:Long = 0): Long = {
     if (cardNumber > 0) {
       if (double) {
-        if (cardNumber%10 * 2 >9) luhn(cardNumber/10, false,total + ((cardNumber%10) * 2) % 10 + 1)
+        if (cardNumber%10 * 2 >9) luhn(cardNumber/10, double = false,total + ((cardNumber%10) * 2) % 10 + 1)
         else luhn(cardNumber/10, double = false, total + cardNumber%10 * 2)
       }
       else luhn(cardNumber/10, double = true, total+(cardNumber%10))
@@ -18,7 +19,7 @@ object day4 extends App {
   }
 
   def addCheckDigit(cardNumber:Long):Long = {
-    cardNumber*10 + (10 - luhn(cardNumber, true))
+    cardNumber*10 + (10 - luhn(cardNumber, double = true))
   }
 
 //  println(s"is 49927398716 a valid credit card number: ${validCreditCard(49927398716L)}")
@@ -27,6 +28,7 @@ object day4 extends App {
   def blackJack(card1:Int, card2:Int) = (card1, card2) match{
     case (0, y) if y<=21 => y
     case (x, 0) if x<=21 => x
+    case (x,y) if x> 21 && y>21 => 0
     case (x,y) if x>21 && y <= 21 => y
     case (x,y) if x<=21 && y > 21 => x
     case (x,y) => if (x > y) x else y
